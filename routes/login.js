@@ -17,18 +17,19 @@ module.exports = (router) => {
     console.log(method);
     console.log(name);
     // parse based on basic or whatever method
-    User.find({name: name}, (err, user) => {
+    User.findOne({name: name}, (err, user) => {
       console.log('in user find');
       if (err) res.json({err: 'errors'});
-      // res.json(user[0]);
-      // let valid = user.compareHash(password)
-      // if (!valid) {
-      //   return res.json({status: 'failure'})
-      // }
+        let valid = user.compareHash(password)
+      if (!valid) {
+        return res.json({status: 'failure'})
+      }
       // generate and return the token
-      res.json({token: user[0].generateToken()});
+      res.json({token: user.generateToken()});
     });
   });
 };
 
-// curl -X POST -u user3:123 http://localhost:3000/public/login
+// curl -X POST -u user6:123 http://localhost:3000/public/login
+
+//curl -X GET -H 'authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NmYyZTg2ZjNlZjk1YTcyMzk0NDk5NzAiLCJpYXQiOjE0NTg3NTk4MTN9.FnrgIQ3xDcuWdFOlktrJj5VnR10n2bHjjcG9Qa0vASI' http://localhost:3000/public/login

@@ -7,8 +7,9 @@ let mongoose = require('mongoose')
 let publicRouter = express.Router()
 let apiRouter = express.Router()
 
-let DB_PORT = 'mongodb://localhost/db'
-mongoose.connect(DB_PORT);
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/db');
+
+
 
 require('./routes/login')(publicRouter) //dependency injection
 require('./routes/new-user')(publicRouter)

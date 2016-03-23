@@ -9,6 +9,8 @@ var request = chai.request;
 let mongoose = require('mongoose');
 var port = 'localhost:3000';
 
+// mongoose.connect(MONGOLAB_URI || 'mongodb://localhost/testdb')
+
 describe('testing functionality of the server', function() {
   after((done) => {
     mongoose.connection.db.dropDatabase(() =>{
@@ -29,7 +31,7 @@ describe('testing functionality of the server', function() {
   it('should POST', (done) => {
     request(port)
       .post('/public/new-user')
-      .send({name: 'testuser', password: '123'})
+      .send({name: 'testuser222', password: '123'})
       .end((err, res) => {
         expect(err).to.eql(null);
         expect(res.body._id).to.exist;//check for id
@@ -40,10 +42,11 @@ describe('testing functionality of the server', function() {
   it('should POST', (done) => {
     request(port)
       .post('/public/login')
-      .send({name: 'user1', password: '123'})
+      .auth('testuser222', '123')
       .end((err, res) => {
+        console.log(res.body);
         expect(err).to.eql(null);
-        expect(res.body).to.be.an('object');//check for id
+        expect(res.body.token).to.exist;
         done();
       });
   });

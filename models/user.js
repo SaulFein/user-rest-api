@@ -13,10 +13,10 @@ userSchema.pre('save', function(next) {
   next()
 })
 
-// //userSchema.methods.hashPassword
-// userSchema.methods.compareHash = function(password) {
-//   return bcrypt.compareSync(password, this.password)
-// }
+//userSchema.methods.hashPassword
+userSchema.methods.compareHash = function(password) {
+  return bcrypt.compareSync(password, this.password)
+}
 
 userSchema.methods.generateToken = function() {
   return jwt.sign({_id: this._id}, 'CHANGE ME');
