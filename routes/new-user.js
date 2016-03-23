@@ -1,6 +1,6 @@
-'use strict'
-let jwt = require('jsonwebtoken')
-let User = require('../models/user')
+'use strict';
+// let jwt = require('jsonwebtoken');
+let User = require('../models/user');
 
 module.exports = (router) => {
   router.post('/new-user', (req, res) => {
@@ -9,9 +9,9 @@ module.exports = (router) => {
     console.log(newUser);
     newUser.save((err, user) => {
       res.json(user);
-    })
-  })
-}
+    });
+  });
+};
 
 
 //curl -H "Content-Type: application/json" -X POST -d '{"name":"user3","password":"123"}' http://localhost:3000/public/new-user
