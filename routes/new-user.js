@@ -14,4 +14,4 @@ module.exports = (router) => {
 }
 
 
-//curl -H "Content-Type: application/json" -X POST -d '{"username":"xyz","password":"123"}' http://localhost:3000/new-user
+//curl -H "Content-Type: application/json" -X POST -d '{"name":"user3","password":"123"}' http://localhost:3000/public/new-user
